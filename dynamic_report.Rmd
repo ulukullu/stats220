@@ -1,0 +1,72 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  font-family: arial;
+}
+h2{
+color = #2C3E60;
+}
+
+```
+
+## Analysing of video watching habits
+
+This dynamic report consists of 22 reponses from the google form "Youtube videos you watch", it will show how different 22 responders engage with videos, and how long those videos were. It will also give out minimum, maximum and mean duration of those videos as well.
+
+```{r}
+
+library(tidyverse)
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRiB1EB4fTMvrwnVmVaJmAXc8NUsulyPYhOpOZIEPkJedTi_UCODYUtlpoAaTycgW9SZPv3VkwKlqns/pub?output=csv")
+
+latest_data <- logged_data %>%
+  rename(
+    timestamp = `Timestamp`,
+    video_type = `What type of video did you watch?`,
+    duration = `How long was the video?  (Must be a whole number minutes watched, e.g., 10).`,
+    reason = `What made you decide to watch this video?`,
+    interact = `Did you interact with the video (like, comment, share, subscribe)?`,
+    engaging = `How engaging was the video?`
+  )
+
+summary(latest_data)
+min_duration <- min(latest_data$duration, na.rm = TRUE)
+max_duration <- max(latest_data$duration, na.rm = TRUE)
+mean_duration <- mean(latest_data$duration, na.rm = TRUE)
+num_videos <- nrow(latest_data)
+print(paste("Minimum duration:", min_duration))
+print(paste("Maximum duration:", max_duration))
+print(paste("Mean duration:", round(mean_duration, 2)))
+
+
+#Bar chart for duration
+duration_plot <- latest_data %>%
+  ggplot() + 
+  geom_bar(aes(x = duration),
+           fill = "blue") +
+  labs(title = "Video durations people have watched",
+       subtitle = "Comparing video duration across different categories",
+       x = "Video Duration (minutes)",
+       y = "Number of Videos")
+print(duration_plot)
+
+
+#Bar chart for engagement level
+engagement_plot <- latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = engaging),
+           fill = "darkgreen") +
+  labs(title = "Engagement with Videos",
+       x = "Engagement Level",
+       y = "Count")
+print(engagement_plot)
+
+```
