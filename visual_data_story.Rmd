@@ -1,0 +1,75 @@
+---
+title: Observations In The Gym
+output: html_document
+---
+
+```{=html}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{js}
+$(function() {
+  $(".level2").css('visibility', 'hidden');
+  $(".level2").first().css('visibility', 'visible');
+  $(".container-fluid").height($(".container-fluid").height() + 300);
+  $(window).on('scroll', function() {
+    $('h2').each(function() {
+      var h2Top = $(this).offset().top - $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (h2Top >= 0 && h2Top <= windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'visible');
+      } else if (h2Top > windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'hidden');
+      }
+    });
+  });
+})
+```
+
+```{css}
+.figcaption{display:none}
+
+body {
+  font-family: Bold, sans-serif;
+  background-color: #8697c4;
+  color: white;
+}
+
+h2 {
+  color: #3d52A0;
+}
+
+
+```
+
+## **Introduction**
+
+#### In this project, I have constructed a Google Form for observational logging on the topic "Which brand of shoes and designs do people wear most at the gym?". I have also collected data on from which hours the gym gets busiest, followed by what exercise people do the most and which brand of shoes do they wear.
+
+## **Which shoe brand is worn the most?**
+
+![shoe_brand plot](Total%20people%20observed%20by%20shoe%20brand.png){width="593"} 
+
+**In the gym, Nike shoes were the most common, followed by Adidas and New Balance. This could be due to Nike's popularity, wide product line and strong branding towards many people. For the least worn, it happens to be Puma, which may be due to not as strong advertising compared to Nike or Adidas, or maybe it has poor performance against other brands as shoes which may contribute to its lower popularity.**
+
+## **Primary Colours?**
+
+![primary colours of shoes](Primary%20colours%20shoes.png){width="601"}
+
+**The most popular shoe colours at the gym are black and grey, followed by white in second place. These colours are likely to be preferred by many people, as these are the most neutral unlike the bright coloured shoes, where they are likely to attract attention and people may not want that. Or simply people may less care about colours as they are just wanting shoes that function well, and not really care much about their fashion at the gym.**
+
+## **Gym activity by hour?**
+
+![gym activity by hour](gym%20activity%20by%20hour.png){width="608"}
+
+**The peak hour at the gym turned out to be between 5pm to 7pm. This could be due to as most people finish work or school, they would come to gym and making it the busiest time of the day. Midnight to early morning is when there are least amount of people present at the gym, as most people would be asleep or on their way to work.**
+
+## **Exercise type by shoe brand?**
+
+![exercise by shoe brand](Exercise%20Type%20by%20shoe%20brand.png){width="594"}
+
+**In the gym, strength-training exercises were most commonly seen, with those wearing Nike shoes, followed by Adidas and New Balance. Nike shoes are the most common amongst all types of exercises in the gym, which is also seen in the most worn brand under stretching exercises. Least exercises being done was cardio, with Reebok and Asics shoes.**
